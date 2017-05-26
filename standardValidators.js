@@ -1,9 +1,14 @@
 var validators = require('./validator.js').validators;
 
-validators.required = function()
+validators.prototype.required = function()
 {
-    if ( this.object === undefined || this.object == null )
-        throw new ValidationException('Field {0} is not available'.format(object.name));
+    this.addValidator(function(property)
+    {
+        if ( property === undefined || property == null )
+            throw new ValidationException('Field {0} is not available'.format(object.name));
+    });
+
+    return this;
 }
 
 module.exports;
